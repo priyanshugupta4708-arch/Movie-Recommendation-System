@@ -1,5 +1,12 @@
 import streamlit as st
 from recommender import recommend
+import os
+import subprocess
+
+# Build model automatically if it doesn't exist
+if not os.path.exists("models/similarity.pkl"):
+    st.info("Building recommendation model for first run... Please wait ⏳")
+    subprocess.run(["python", "models/build_model.py"])
 
 # -----------------------
 # Page Config

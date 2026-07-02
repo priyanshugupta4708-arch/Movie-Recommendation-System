@@ -2,6 +2,7 @@ import pandas as pd
 import ast
 import pickle
 
+
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -29,7 +30,7 @@ movies = movies[
         "keywords",
         "cast",
         "crew",
-        "poster_path"
+        
     ]
 ]
 
@@ -109,7 +110,7 @@ movies["tags"] = (
 # New DataFrame
 # ===========================
 
-new_df = movies[['movie_id', 'title', 'tags', 'poster_path' ]]
+new_df = movies[['movie_id', 'title', 'tags']]
 
 new_df["tags"] = new_df["tags"].apply(lambda x: " ".join(x))
 new_df["tags"] = new_df["tags"].apply(lambda x: x.lower())
