@@ -21,10 +21,6 @@ if not os.path.exists("models/similarity.pkl"):
 # 👇 YE LINE YAHAN HOGI (subprocess ke bahar)
 from recommender import recommend
 
-if result.returncode != 0:
-    st.error("Model build failed!")
-    st.code(result.stderr)
-    st.stop()
 
 # -----------------------
 # Page Config
