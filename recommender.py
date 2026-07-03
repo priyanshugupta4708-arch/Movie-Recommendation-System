@@ -1,8 +1,14 @@
 import pickle
 import requests
 
+# ==========================
+# TMDB API KEY
+# ==========================
 API_KEY = "a1d8428b743b8f0449d54b2cae2cbe47"
 
+# ==========================
+# Load Model
+# ==========================
 movies = None
 similarity = None
 
@@ -53,23 +59,22 @@ def fetch_poster(movie_id):
         print("Poster Error:", e)
         return "https://placehold.co/500x750?text=No+Poster"
 
-def recommend(movie):
 
-    load_model()
-
-    movie = movie.lower()
 # ==========================
 # Recommend Movies
 # ==========================
 def recommend(movie):
 
-    movie = movie.lower()
+    load_model()
 
-    try:
-        index = movies[movies["title"].str.lower() == movie].index[0]
+    movie = movie.strip().lower()
 
-    except:
+    matches = movies[movies["title"].str.lower() == movie]
+
+    if matches.empty:
         return [], []
+
+    index = matches.index[0]
 
     distances = sorted(
         list(enumerate(similarity[index])),
