@@ -1,4 +1,5 @@
 import os
+import sys
 import subprocess
 import streamlit as st
 
@@ -7,10 +8,10 @@ if not os.path.exists("models/similarity.pkl"):
     st.info("Building recommendation model for first run... Please wait ⏳")
 
     result = subprocess.run(
-        ["python", "models/build_model.py"],
-        capture_output=True,
-        text=True
-    )
+    [sys.executable, "models/build_model.py"],
+    capture_output=True,
+    text=True
+)
 
     if result.returncode != 0:
         st.error("Model build failed!")
