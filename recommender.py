@@ -1,16 +1,20 @@
 import pickle
 import requests
 
-# ==========================
-# TMDB API KEY
-# ==========================
 API_KEY = "a1d8428b743b8f0449d54b2cae2cbe47"
 
-# ==========================
-# Load Model
-# ==========================
-movies = pickle.load(open("models/movies.pkl", "rb"))
-similarity = pickle.load(open("models/similarity.pkl", "rb"))
+movies = None
+similarity = None
+
+
+def load_model():
+    global movies, similarity
+
+    if movies is None:
+        movies = pickle.load(open("models/movies.pkl", "rb"))
+
+    if similarity is None:
+        similarity = pickle.load(open("models/similarity.pkl", "rb"))
 
 
 # ==========================
@@ -49,7 +53,11 @@ def fetch_poster(movie_id):
         print("Poster Error:", e)
         return "https://placehold.co/500x750?text=No+Poster"
 
+def recommend(movie):
 
+    load_model()
+
+    movie = movie.lower()
 # ==========================
 # Recommend Movies
 # ==========================
